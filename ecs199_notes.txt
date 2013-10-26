@@ -1,0 +1,134 @@
+Nikolay Voronchikhin
+ECS 199
+
+10/14/13:
+
+Tools:
+0) what language?
+web scrape data: one language
+show data: different language
+basic: easy to read file. object give url, returns letter by letter. 
+Eclipse IDE. 
+
+local program. not client program.
+query db, show results on screen. combo box. graphics. analysis. 
+
+1) given URL, read and save HTML into a file
+2) throw out tags, save without tags
+3) save only information we need
+4) choose table we need: get data we need
+5) querying the site with different parameters
+6) mysql db, 1 table
+7) get connection to table, read/write to db
+8) read file, bring data to table
+9) get from table, generate my own html with results
+
+sid
+orderBy
+toggel 	
+profDept
+profRatings
+profAvg
+profEasy
+
+tableid
+univid
+department
+ratings
+
+easiness
+
+
+save into file or database
+read file in Java
+
+question: do you want to see it via public website?
+where to host website? independent.
+must have SQL. 
+
+
+parse HTML in Java. 
+Div class=profDept
+
+java, jsp, html, javascript, css
+mysql
+
+mysql insert record to table
+sql schema
+
+2 tables: departments and universities
+table: univerid, deptid, score
+
+1 table: univid, rowid, profDept, profRatings, profAvg, profEasy
+
+
+10/16/13: 
+prepared statement
+insert into table
+
+1) generate insert statements
+redo while
+4 ifs for each, 4 lines (r1,r2,r3,r4, each line needs data, substring)
+
+read page, 20 records in mysql db
+r1: computer science
+r2: 800
+r3: 2.3
+r4: 5.6
+
+ssql. 
+con.
+con.executeupdate
+
+cycle, 20 lines. 
+
+
+added to db. 
+read schools, add 
+query to show avg by department across schools
+every day, goes in there and adds information.
+should not add duplicates to db. 
+update database. 
+
+TODO: add profName to table to check for duplicates.
+
+MySQL Server Database.
+Eclipse IDE EE for Java Developers.
+JDBC Connection.
+MySQL/Eclipse Connector jar.
+
+
+10/18/13:
+
+1. Make sure functions work: insert and update ratings
+2. Instead of insert into in Java procedure, Call it from MySQL DB, make sure it works
+3. Create table universities (univid,Name,State, lastupdated)
+4. Read list of universities into the table
+http://www.ratemyprofessors.com/SelectSchool.jsp?country=0&stateselect=CA
+ 
+Read univid from table universities and read all ratings for the university 
+update table universities with today's date to see that this one already done
+
+10/22/13:
+
+main:
+readUniversity(881);
+
+make procedure readUniversity stored procedure in Java. put everything in there.
+in: univId
+no out.
+
+readUniversityList(varchar(50) state) Java procedure;
+parse/scan HTML again
+school id :(univid)
+schoolName: (univname)
+
+Next TODO:
+1. selecting top 5 univid from universities (first 5 universities)
+2. read to a variable (in while loop)
+3. call ReadRatings procedure with this univid
+4. see ratings table growing
+5. add SQL procedure statement to update last updated
+
+
+
