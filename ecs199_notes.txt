@@ -130,5 +130,234 @@ Next TODO:
 4. see ratings table growing
 5. add SQL procedure statement to update last updated
 
+top5, query top5
+
+
+10/30/13:
+
+Got top 5 univids and all their ratings!
+
+To make better log for testing SQL:
+print out to the file, all queries (select, insert , update)
+and all webpages (http:\\)
+--> see complete flow of running program
+
+1. Create tables
+2. Generate SQL script and save it as text file
+3. Create store procedure, save it to another text file
+ 
+For multi-language systems, Keep all parts in proper folders.
+ECS199\Java
+ECS199\SQL
+
+
+Next steps:
+
+Update universities table with lastUpdated date
+Inside of the stored procedure test.InsertUpdateRating
+ 
+Java: 
+Read top 5 univid where lastUpdated is NULL
+*Reads first 5, then continues until end of file, and fills in ratings table to the end automatically
+
+
+11/4/13:
+adding query in stored procedure to update universities table with lastUpdated current date and time
+univid change to unique in table universities
+ran program, universities table, first 5 rows has lastUpdated column updated with current time
+all other rows are null
+topFive(): add condition where lastupdated is not null
+it should read next 5 univ and update lastUpdated
+
+*output all sql queries, debug faster, see what is wrong.
+
+curdate() returns date
+curtime() returns time
+now() returns date and time
+
+add pause function in Java.
+add 20-30 at a time, then pause for 30 seconds. keep going until end of file.
+
+next comes statistics, science, web application parts.
+100*20=2000 records in ratings table is enough to do stats.
+
+*Will ask professor Devanbu how to do T-test and check hypothesis
+
+Web Application: need to run query and show as HTML
+what to show? what are parameters?
+show query results. Link SQL to Excel.
+
+Writing query that calculates Average Rating, and Average Easiness by major
+Filter out where profRatings<100 (drop)
+
+got profRatings, profRating, and profEasy
+query grouped by profDept
+
+count how many rows:
+SELECT count(*) FROM test.ratings where profRatings>=100;
+
+group by, average:
+SELECT profDept, ROUND(AVG(profAvg) ,2) AS "Prof Average",  ROUND(AVG(profEasy) ,2) AS "Prof Easiness"  FROM test.ratings where profRatings>=100 group by profDept;
+(57 rows)
+
+how many different profDept:
+select distinct profDept from test.ratings;  (114 rows)
+
+
+
+
+T-Test using Microsoft Exce;:
+Proof that 2 sets are not statistically different from each other.
+
+N (=Count())
+Set A, Set B, Averages (=AVG()), Standard Deviations (=STDEV())
+
+Insert Function (Statistical) T Test
+Array 1: Set A
+Array 2: Set B
+Tails: 2 (don't know which direction it's closer to)
+Type: 3 (unpaired data, independent, different)
+
+Format Cells>Number, 2 decimal places
+
+Tools>Add-ins, Data Analysis
+T-test: Two-Sample Assuming Unequal Variances (Unpaired)
+Variable 1 Range: Set A
+Variable 2 Range: Set B
+Aloha (p): 0.05
+
+P(T<=t) two-tail is the probability. 
+
+accept null hypothesis if >0.05 (p)
+There is no difference visibly between setA and setB
+
+reject null hypothesis if <0.05 (p)
+
+
+*Everyday, read 100 new universities!
+
+Order by ProfAvg
+Order by ProfEasy
+SELECT profDept, ROUND(AVG(profAvg) ,2) AS "Prof Average",  ROUND(AVG(profEasy) ,2) AS "Prof Easiness"  FROM test.ratings where profRatings>=100 group by profDept order by 2 DESC;
+SELECT profDept, ROUND(AVG(profAvg) ,2) AS "Prof Average",  ROUND(AVG(profEasy) ,2) AS "Prof Easiness"  FROM test.ratings where profRatings>=100 group by profDept order by 3 DESC;
+order by 2nd and 3rd column in descending order.
+
+results can be presented and published.
+ 
+best when ordered by profAvg are labor studies, animal science, criminal justice, communications, human development, mathematics & statistics, critical thinking, religious studies, history & communications, art, health science, recreation, fine arts, classics, business law, theology, astronomy, athropology, finance, nutrition
+statistics has lowest followed by biological sciences, two worst rated in first 100 list in CA schools
+computer science is down there too, as well as accounting, business, marketing, physics, economics, computer engineering
+
+Conclusion: 90% of the time, ratings for sciences and engineering will be lower than humanities and social sciences
+
+There is almost an identical relationship between professor Easiness and professor Rating given by students.
+
+Next: categorize by social sciences, mathematics, biomedical, humanities, computer science, engineering
+
+
+
+11/5/13:
+
+where to host website? currently on localhost. mysql server.
+how do you want me to show data?
+
+science experiments. t-tests using Excel.
+
+Next plan:
+1) categorize by social sciences, humanities, engineering, physical sciences (stats/math/CS)
+2) show tables on web application (as HTML)
+3) do statistical analysis & t-tests
+
+
+1. Web application (showing query result as a table on Website)
+2. Create different queries of interest
+3. Classify dept by Social sciences, Humanities, Engineering, Physical Sciences, etc.
+4. Classify univ by State, Public, Private
+5. Read univ from all states
+6. Read 100 new univ a day
+7. do t-test in Excel
+8. Some graphs in Excel
+9. Some graphs for Website
+
+
+Questions: 
+1) What sets do you want me to do the T-Tests on?
+How many sets will be necessary and what exactly do you want me to compare?
+
+2) What type of data, tables, charts do you want to see on the web applications? 
+Currently, I can write queries to show all departments, ratings, rating, easiness, all universities in every state, and the average of the easiness and rating for each department.
+
+3) Where do you want to host the websiteand when do you want to go LIVE?
+
+4) What are your plans for publishing and how can I help?
+
+
+
+11/8/13 Notes:
+
+universities: univid, lastUpdated
+ratings: univid, profDept, profRatings, profAvg, profEasy, profid
+Export to CSV file. 
+
+Professor Devanbu used R to do statistics analysis and charts/graphs.
+Plots, correlation, t test, linear model: regress, boxplot, summary ratings by prof
+samples, need more sample, long tailed = good
+no relationship between # of ratings and easiness
+no relationship between # of ratings and average
+
+compare different majors
+ratings per prof, per course (need all 5 ratings)
+
+TODO:
+Sample: All profs, majors, courses in UC Davis, Berkeley, Rutgers, Yale
+
+Have 35+ samples for each profDept. 
+create new table courses: univid, profid, profDept, courseid, 5 different ratings
+
+Export all 3 tables as CSV and send to professor.
+Update Powerpoint.
+
+
+
+UC Davis id: 1073
+UC Berkeley id: 1072
+Yale id: 1222
+Rutgers id: 825
+
+
+Developing/Debugging steps:
+1. Create database (Access, MySQL, Oracle, SQLite,  MsSQL, PostgreSQL)
+2. Create table
+3. Create stored procedure to insert record into the table
+3a) test procedure manually in MySQL WorkBench, Toad for Oracle, or Microsoft SQL Server
+4. Initial test cases in main
+5. Print input, SQL, output, results to file to see what was wrong.
+5a) if doesn't work: Check SQL, comparing with 3a) How sSql created in the program differs from created manually.
+6. After it works in main, Create method/procedure for automation
+7. Call method from main
+8. Export tables to CSV
+9. Statistical analysis in R Studio, Excel
+10. Post tables in a Web Application
+
+
+4 universities.
+4404 professors in Rutgers University
+3023 professors in UC Berkeley (California)
+3475 professors in UC Davis 
+444 professors in Yale University
+
+Total classes for all professors:
+20,068 courses in Rutgers University
+11,405 courses in UC Berkeley (CALIFORNIA)
+45,430 courses in UC Davis
+1,785 courses in Yale University
+
+MySQL WorkBench>Edit>Preferences>SQL Queries
+Uncheck Limit rows
+
+
+
+
+
 
 
