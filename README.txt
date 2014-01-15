@@ -1,11 +1,5 @@
 This is my Undergraduate Research Project for ECS 199.
 
-Background:
-Name: Nikolay Voronchikhin
-Major: Computer Science
-Course: ECS 199, 3 units, Fall 2013
-Instructor: Premkumar Devanbu
-
 Project Title:
 FINDING DEPENDENCIES BETWEEN RATINGS AND MAJORS
 
