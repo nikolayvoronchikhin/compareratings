@@ -1,7 +1,6 @@
 import java.net.*;
 import java.io.*;
 //Sql.java -- sample program to read a database 
-//Configure the database for ODBC access using Start->Settings->Control Panel->ODBC32
 import java.sql.*;
 
 public class Main {
@@ -13,7 +12,7 @@ public class Main {
         Connection con = null;
         PreparedStatement stmt = null;
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test", "root", "fadrueJ@3");
+            con = DriverManager.getConnection("jdbc:mysql://localhost", "", "");
         
         String sURL2;
         sURL2="http://www.ratemyprofessors.com/SelectSchool.jsp?country=0&stateselect="+state;
@@ -82,7 +81,7 @@ public class Main {
         Connection con = null;
         PreparedStatement stmt = null;
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test", "root", "fadrueJ@3");
+            con = DriverManager.getConnection("jdbc:mysql://localhost", "", "");
         
         String sURL;
         sURL="http://www.ratemyprofessors.com/SelectTeacher.jsp?the_dept=All&sid="+univId+"&orderby=TNumRatings&toggel=true&pageNo="+pageNum;
@@ -166,7 +165,7 @@ public class Main {
         Connection con = null;
         PreparedStatement stmt = null;
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test", "root", "fadrueJ@3");
+            con = DriverManager.getConnection("jdbc:mysql://localhost", "", "");
         
         String sURL;
         sURL="http://www.ratemyprofessors.com/ShowRatings.jsp?tid="+profId+"&pageNo="+pageNum;
@@ -344,7 +343,7 @@ public class Main {
 	    Connection con=null;
 	        
 	    try {
-	        con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test", "root", "fadrueJ@3");
+	        con = DriverManager.getConnection("jdbc:mysql://localhost", "", "");
 	        
 	        String query = "select univid from test.universities where univid=825 or univid=1072 or univid=1073 or univid=1222;";
 	        stmt = con.createStatement();
@@ -394,7 +393,7 @@ public class Main {
 	    Connection con=null;
 	        
 	    try {
-	        con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test", "root", "fadrueJ@3");
+	        con = DriverManager.getConnection("jdbc:mysql://localhost", "", "");
 	        
 	        String query = "select profId from test.ratings where univid=1222;";
 	        stmt = con.createStatement();
@@ -447,7 +446,7 @@ public class Main {
         //readUniversityList("NJ"); // reading all universities in New Jersey
         //readUniversityList("CT"); // reading all universities in Connecticut
     	//CallUniversity(); // read into ratings table
-    	CallProfessor(); // read into professors table
+    	//CallProfessor(); // read into professors table
     	//ProfessorLast(56748); // testing total number of pages for a professor, returns correct result
     	//UniversityLast(825);  // testing total number of pages for a university, returns correct result
     }
