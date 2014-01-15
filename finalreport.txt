@@ -1,0 +1,97 @@
+Project Title:
+FINDING DEPENDENCIES BETWEEN RATINGS AND MAJORS
+
+Objective:
+The objective of this project is to compare and contrast humanities and computer science professor ratings to figure out which majors get the higher ratings using a T-Test and a university chosen at random. 
+Hypothesis is that ratings for humanities and social science professors are higher because the curriculum is easier than CS, students get low grades in their first CS class as opposed to humanities and social sciences, and thus, students tend to go for those majors opposed to Computer Science, Mathematics, and Engineering.
+
+Motivation:
+On average, college students declare their major(s) and minor(s) by the end of their sophomore year. On average, Computer Science, Mathematics, Engineering, and other physical sciences tend to scare students away from these majors and career fields due to their difficult curriculum and learning curve compared to humanities and social science majors and careers. More than 15 million student-generated comments & ratings of over 1.8 million professors at over 8,000 schools have been made at RateMyProfessors.com. Comments and ratings are only two factors in the students' decisions to choosing courses and professors every quarter and semester, and they play a larger role now more than ever because of the high popularity of this website's content. There is currently no scientific evidence to suggest that students are moving away from the physical sciences to the humanities and social sciences. Over time, scientists, professors, educators, and leaders around the country and the world may propose or implement a new way of teaching students for these tougher majors in order to attract and retain more students who, otherwise, would not continue with these majors due to their level of difficulty.
+
+Goals:
+In doing this research project, we hope to achieve the following goals: To prove the hypothesis that humanities and social science professors get higher ratings and approval opposed to computer science professors. To create database with data. To find patterns based on major and ratings. To provide a filtered visualization of the data with professors, departments, and ratings. To create a detailed final report explaining the results, providing future direction, and, hopefully, changing the way professors teach Science and Engineering courses.
+
+Initial Steps:
+1. Analyze what data is available: Professor, Major, University, Rating, Easiness
+2. Create own MySQL database. Create tables, relations: University, Professor, Rating
+3. "Scrape" RateMyProfessors.com to get data in our own database.
+5. Test hypothesis, T-test and other statistics approaches
+4. Find dependencies/patterns between majors and ratings. 
+5. Represent/visualize data on web with different presentation (by university, subject,state, etc.)
+7. Optimize Database to make web-querying work faster.
+8. Publish results on the web.
+
+Implementation Design:
+1) given URL, read and save HTML into a file
+2) throw out tags, save without tags
+3) save only information we need
+4) choose table and data criteria.
+5) querying the site with different parameters
+6) Using MySQL DB, create tables
+7) get connection to table, read/write to DB.
+8) read file, bring data to table
+9) get from table, generate my own html with results
+
+Step-By-Step Development:
+1) Using Eclipse IDE, JAVA, JSP, JavaScript, MySQL Workbench, prove hypothesis.
+	a) Additionally, needed JDBC Connection, MySQL/Eclipse Connector jar to make it work.
+2) Build SQL Schema, DB Tables, Constraints.
+3) Initially, We needed 2 tables: departments and universities
+department: univerid, deptid, score
+university: univid, rowid, profDept, profRatings, profAvg, profEasy
+4) Create stored procedure in MySQL. Generated insert statements. Parse RateMyProfessors.com
+5) Read page into a textfile. Parse data. Execute updates. Show/Test in Eclipse IDE window and MySQL
+6) Eliminate duplicates from DB. Query can show avg, min, max, count for # of Ratings for a professor, Professor Overall Quality, and Professor Easiness.
+7) Test functionality of Insert and update functions based on current time and date.
+8) Read list of universities from RateMyProfessors.com into the universities table.
+9) Get top 5 universities with all ratings for testing. Later chose UC Davis, UC Berkeley, Rutgers University, Yale.
+10) Print to different files: database tables and columns, stored procedures, SQL query logs, SQL Scripts, HTML file logs, anomalies, debugging.
+11) Add pause functionality to insert to DB statement so that RateMyProfessors.com's servers and firewalls do not get mad.
+
+Mid-Quarter Professor Visit:
+12) Need 3 tables: ratings, universities and professors
+ratings: univid, profDept, profRatings, profAvg, profEasy, profid
+universities: univid, univname, univstate, lastUpdated
+professors: profid, univid, profDept, Class, Easiness, Helpfulness, Clarity, RaterInterest
+13) Export tables to CSV file and send to Professor for review, statistical analysis, etc.
+14) Professor Devanbu used R to do statistics analysis and charts/graphs.
+15) Plots, correlation, t test, linear model: regress, boxplot, summary ratings by prof
+16) Found that there is no relationship between # of ratings and easiness
+17) Found that there is no relationship between # of ratings and average
+18) ratings per prof, per course (need all 5 ratings in RateMyProfessors.com)
+19) Have 35+ samples for each profDept for a good random sample.
+	
+Developing/Debugging steps:
+1. Create database (Access, MySQL, Oracle, SQLite,  MSSQL, PostgreSQL, MongoDB, Neo4j, NoSQL, Google, Amazon)
+2. Create table
+3. Create stored procedure to insert record into the table
+	a) test procedure manually in MySQL WorkBench
+4. Initial test cases in main() in Java
+5. Print input, SQL, output, results to file to see what was wrong.
+	a) if doesn't work: Check SQL, comparing with 3a) How sSql created in the program differs from created manually.
+6. After it works in main(), Create method/procedure for automation
+7. Call method from main()
+8. Export tables to CSV
+9. Statistical analysis in R Studio, Excel
+10. Web Application
+
+Conclusion: 
+90% of the time, ratings for sciences and engineering will be lower than humanities and social sciences
+There is almost an identical relationship between professor Easiness and professor Rating given by students.
+Based on initial data, Found that there is no relationship between # of ratings and easiness
+Based on initial data, Found that there is no relationship between # of ratings and average
+
+Future Steps:
+1) Update data constantly going forward, and add more data sources.
+2) Categorize by social sciences, humanities, engineering, physical sciences (stats/math/CS)
+3) Show tables on web application (as HTML)
+4) Do statistical analysis & t-tests, regression tests, etc.
+5) Web application (showing query result as a table on Website)
+6) Create different queries of interest
+7) Classify dept by Social sciences, Humanities, Engineering, Physical Sciences, etc.
+8) Classify univ by State, Public, Private
+9) Read univ from all states
+10) Read 100 new univ a day
+11) Some graphs in Excel
+12) Some graphs for Website
+Extra: It would be interesting to find college grads by major to see if there is a correlation between ratings on RateMyProfessors.com and the graduate statistics.
