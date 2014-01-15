@@ -1,7 +1,6 @@
 import java.net.*;
 import java.io.*;
 //Sql.java -- sample program to read a database 
-//Configure the database for ODBC access using Start->Settings->Control Panel->ODBC32
 import java.sql.*;
 
 public class Main {
@@ -13,7 +12,7 @@ public class Main {
         Connection con = null;
         PreparedStatement stmt = null;
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test", "root", "fadrueJ@3");
+            con = DriverManager.getConnection("jdbc:mysql://localhost", "", "");
         
         String sURL2;
         sURL2="http://www.ratemyprofessors.com/SelectSchool.jsp?country=0&stateselect="+state;
@@ -43,7 +42,7 @@ public class Main {
                         inputLine.indexOf("</a>")-2) ;
                 r1 = r1.replaceAll("'", "");
                 out2.println(r1);
-                sSQL2 = "INSERT INTO test.universities(univid, univname,univstate) VALUES("+r2+",'"+r1+"','"+state+"');";  
+                sSQL2 = "INSERT INTO universities(univid, univname,univstate) VALUES("+r2+",'"+r1+"','"+state+"');";  
                 out2.println(sSQL2);
                 stmt = con.prepareStatement(sSQL2);
                 stmt.executeUpdate();
@@ -82,7 +81,7 @@ public class Main {
         Connection con = null;
         PreparedStatement stmt = null;
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test", "root", "fadrueJ@3");
+            con = DriverManager.getConnection("jdbc:mysql://localhost", "", "");
         
         String sURL;
         sURL="http://www.ratemyprofessors.com/SelectTeacher.jsp?the_dept=All&sid="+univId+"&orderby=TNumRatings&toggel=true&pageNo="+pageNum;
@@ -131,7 +130,7 @@ public class Main {
                 inputLine = inputLine.trim();
                 r4 = inputLine.substring(22,inputLine.length()-6);
                 out.println(r4);
-                sSQL = "call test.InsertUpdateRatings("+univId+",'"+r1+"',"+r2+","+r3+","+r4+","+r5+"); ";
+                sSQL = "call InsertUpdateRatings("+univId+",'"+r1+"',"+r2+","+r3+","+r4+","+r5+"); ";
                 out.println(sSQL);
                 stmt = con.prepareStatement(sSQL);
                 stmt.executeUpdate();
@@ -166,7 +165,7 @@ public class Main {
         Connection con = null;
         PreparedStatement stmt = null;
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test", "root", "fadrueJ@3");
+            con = DriverManager.getConnection("jdbc:mysql://localhost", "", "");
         
         String sURL;
         sURL="http://www.ratemyprofessors.com/ShowRatings.jsp?tid="+profId+"&pageNo="+pageNum;
@@ -238,7 +237,7 @@ public class Main {
                 inputLine = inputLine.trim();
                 r7 = inputLine.substring(66,67);
                 out.println(r7);
-                sSQL = "call test.InsertUpdateProfessors("+profId+","+r1+",'"+r2+"','"+r3+"',"+r4+","+r5+","+r6+","+r7+"); ";
+                sSQL = "call InsertUpdateProfessors("+profId+","+r1+",'"+r2+"','"+r3+"',"+r4+","+r5+","+r6+","+r7+"); ";
                 out.println(sSQL);
                 stmt = con.prepareStatement(sSQL);
                 stmt.executeUpdate();
@@ -344,9 +343,9 @@ public class Main {
 	    Connection con=null;
 	        
 	    try {
-	        con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test", "root", "fadrueJ@3");
+	        con = DriverManager.getConnection("jdbc:mysql://localhost", "", "");
 	        
-	        String query = "select univid from test.universities where univid=825 or univid=1072 or univid=1073 or univid=1222;";
+	        String query = "select univid from universities where univid=825 or univid=1072 or univid=1073 or univid=1222;";
 	        stmt = con.createStatement();
 	        ResultSet rs = stmt.executeQuery(query);
 	        
@@ -394,9 +393,9 @@ public class Main {
 	    Connection con=null;
 	        
 	    try {
-	        con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test", "root", "fadrueJ@3");
+	        con = DriverManager.getConnection("jdbc:mysql://localhost", "", "");
 	        
-	        String query = "select profId from test.ratings where univid=1222;";
+	        String query = "select profId from ratings where univid=1222;";
 	        stmt = con.createStatement();
 	        ResultSet rs = stmt.executeQuery(query);
 	       
@@ -447,7 +446,7 @@ public class Main {
         //readUniversityList("NJ"); // reading all universities in New Jersey
         //readUniversityList("CT"); // reading all universities in Connecticut
     	//CallUniversity(); // read into ratings table
-    	CallProfessor(); // read into professors table
+    	//CallProfessor(); // read into professors table
     	//ProfessorLast(56748); // testing total number of pages for a professor, returns correct result
     	//UniversityLast(825);  // testing total number of pages for a university, returns correct result
     }
