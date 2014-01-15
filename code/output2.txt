@@ -1,0 +1,3 @@
+16
+Albertus Magnus College
+INSERT INTO test.universities(univid, univname,univstate) VALUES(16,'Albertus Magnus College','CT');
