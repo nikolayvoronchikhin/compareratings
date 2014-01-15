@@ -42,7 +42,7 @@ public class Main {
                         inputLine.indexOf("</a>")-2) ;
                 r1 = r1.replaceAll("'", "");
                 out2.println(r1);
-                sSQL2 = "INSERT INTO test.universities(univid, univname,univstate) VALUES("+r2+",'"+r1+"','"+state+"');";  
+                sSQL2 = "INSERT INTO universities(univid, univname,univstate) VALUES("+r2+",'"+r1+"','"+state+"');";  
                 out2.println(sSQL2);
                 stmt = con.prepareStatement(sSQL2);
                 stmt.executeUpdate();
@@ -130,7 +130,7 @@ public class Main {
                 inputLine = inputLine.trim();
                 r4 = inputLine.substring(22,inputLine.length()-6);
                 out.println(r4);
-                sSQL = "call test.InsertUpdateRatings("+univId+",'"+r1+"',"+r2+","+r3+","+r4+","+r5+"); ";
+                sSQL = "call InsertUpdateRatings("+univId+",'"+r1+"',"+r2+","+r3+","+r4+","+r5+"); ";
                 out.println(sSQL);
                 stmt = con.prepareStatement(sSQL);
                 stmt.executeUpdate();
@@ -237,7 +237,7 @@ public class Main {
                 inputLine = inputLine.trim();
                 r7 = inputLine.substring(66,67);
                 out.println(r7);
-                sSQL = "call test.InsertUpdateProfessors("+profId+","+r1+",'"+r2+"','"+r3+"',"+r4+","+r5+","+r6+","+r7+"); ";
+                sSQL = "call InsertUpdateProfessors("+profId+","+r1+",'"+r2+"','"+r3+"',"+r4+","+r5+","+r6+","+r7+"); ";
                 out.println(sSQL);
                 stmt = con.prepareStatement(sSQL);
                 stmt.executeUpdate();
@@ -345,7 +345,7 @@ public class Main {
 	    try {
 	        con = DriverManager.getConnection("jdbc:mysql://localhost", "", "");
 	        
-	        String query = "select univid from test.universities where univid=825 or univid=1072 or univid=1073 or univid=1222;";
+	        String query = "select univid from universities where univid=825 or univid=1072 or univid=1073 or univid=1222;";
 	        stmt = con.createStatement();
 	        ResultSet rs = stmt.executeQuery(query);
 	        
@@ -395,7 +395,7 @@ public class Main {
 	    try {
 	        con = DriverManager.getConnection("jdbc:mysql://localhost", "", "");
 	        
-	        String query = "select profId from test.ratings where univid=1222;";
+	        String query = "select profId from ratings where univid=1222;";
 	        stmt = con.createStatement();
 	        ResultSet rs = stmt.executeQuery(query);
 	       
