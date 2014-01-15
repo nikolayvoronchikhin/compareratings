@@ -1,7 +1,7 @@
 -- creating and dropping tables ---------------------------
 -----------------------------------------------------------
-TRUNCATE TABLE test.ratings;
-CREATE TABLE test.ratings(
+TRUNCATE TABLE ratings;
+CREATE TABLE ratings(
   `rowid` int(11) NOT NULL AUTO_INCREMENT,
   `univid` int(11) DEFAULT NULL,
   `profDept` varchar(50) DEFAULT NULL,
@@ -12,8 +12,8 @@ CREATE TABLE test.ratings(
   PRIMARY KEY (`rowid`)
 );
 
-TRUNCATE TABLE test.universities;
-CREATE TABLE test.universities (
+TRUNCATE TABLE universities;
+CREATE TABLE universities (
   `univid` int(11) NOT NULL AUTO_INCREMENT,
   `univname` varchar(200) DEFAULT NULL,
   `univstate` varchar(50) DEFAULT NULL,
@@ -21,7 +21,7 @@ CREATE TABLE test.universities (
   PRIMARY KEY (`univid`)
 );
 
-TRUNCATE TABLE test.professors;
+TRUNCATE TABLE professors;
 CREATE TABLE `professors` (
   `rowid` int(11) NOT NULL AUTO_INCREMENT,
   `profId` int(11) NOT NULL,
@@ -45,7 +45,7 @@ CREATE TABLE `professors` (
 -- --------------------------------------------------------------------------------
 DELIMITER $$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insertUpdateRatings`(IN v_univid int, v_profDept varchar(50), v_profRatings int, v_profAvg float, v_profEasy float, v_profId int)
+CREATE PROCEDURE `insertUpdateRatings`(IN v_univid int, v_profDept varchar(50), v_profRatings int, v_profAvg float, v_profEasy float, v_profId int)
 BEGIN
 
 DECLARE t int;
@@ -54,13 +54,13 @@ select rowid into t from test.ratings where profId = v_profId;
 select t;
 
 if (t is null) then
-    INSERT INTO test.ratings(univid,profDept,profRatings,profAvg,profEasy,profID) VALUES (v_univid,v_profDept,v_profRatings,v_profAvg,v_profEasy,v_profId);
+    INSERT INTO ratings(univid,profDept,profRatings,profAvg,profEasy,profID) VALUES (v_univid,v_profDept,v_profRatings,v_profAvg,v_profEasy,v_profId);
 
 else
 begin
 
 UPDATE ratings SET profDept=v_profDept, profRatings=v_profRatings, profAvg=v_profAvg, profEasy=v_profEasy where rowId = t;
-select * from test.ratings;
+select * from ratings;
         
 end;
 
@@ -77,46 +77,46 @@ END
 -- --------------------------------------------------------------------------------
 DELIMITER $$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insertUpdateProfessors`(IN v_profid int, v_univid int, v_profDept varchar(50), v_Class varchar(50), v_Easiness float, v_Helpfulness float, v_Clarity float, v_RaterInterest float)
+CREATE PROCEDURE `insertUpdateProfessors`(IN v_profid int, v_univid int, v_profDept varchar(50), v_Class varchar(50), v_Easiness float, v_Helpfulness float, v_Clarity float, v_RaterInterest float)
 BEGIN
 
-INSERT INTO test.professors(profid,univid,profDept,Class,Easiness,Helpfulness,Clarity,RaterInterest) VALUES (v_profid,v_univid,v_profDept,v_Class,v_Easiness,v_Helpfulness,v_Clarity,v_RaterInterest);
+INSERT INTO professors(profid,univid,profDept,Class,Easiness,Helpfulness,Clarity,RaterInterest) VALUES (v_profid,v_univid,v_profDept,v_Class,v_Easiness,v_Helpfulness,v_Clarity,v_RaterInterest);
 
 END
 
 
 -------------------Testing Stored Procedures----------------------------------------
-truncate test.ratings;
-call test.insertupdateratings(800,'a',60,'2.4','2.3',500);
-select * from test.ratings;
-call test.insertupdateratings(800,'a',60,2.4,2.3,500);
-select * from test.ratings;
+truncate ratings;
+call insertupdateratings(800,'a',60,'2.4','2.3',500);
+select * from ratings;
+call insertupdateratings(800,'a',60,2.4,2.3,500);
+select * from ratings;
 
-SELECT count(*) FROM test.ratings where profRatings>=100;
-SELECT * FROM test.ratings where profRatings>=100 group by profDept;
+SELECT count(*) FROM ratings where profRatings>=100;
+SELECT * FROM ratings where profRatings>=100 group by profDept;
 
-select distinct profDept from test.ratings;
+select distinct profDept from ratings;
 
-SELECT profDept, ROUND(AVG(profAvg) ,2) AS "Prof Average",  ROUND(AVG(profEasy) ,2) AS "Prof Easiness"  FROM test.ratings where profRatings>=100 group by profDept order by 2 DESC;
-SELECT profDept, ROUND(AVG(profAvg) ,2) AS "Prof Average",  ROUND(AVG(profEasy) ,2) AS "Prof Easiness"  FROM test.ratings where profRatings>=100 group by profDept order by 3 DESC;
+SELECT profDept, ROUND(AVG(profAvg) ,2) AS "Prof Average",  ROUND(AVG(profEasy) ,2) AS "Prof Easiness"  FROM ratings where profRatings>=100 group by profDept order by 2 DESC;
+SELECT profDept, ROUND(AVG(profAvg) ,2) AS "Prof Average",  ROUND(AVG(profEasy) ,2) AS "Prof Easiness"  FROM ratings where profRatings>=100 group by profDept order by 3 DESC;
 
 
-SELECT * FROM test.universities;
-truncate test.universities;
-truncate test.ratings;
-select univid from test.universities where lastUpdated is null limit 100;
+SELECT * FROM universities;
+truncate universities;
+truncate ratings;
+select univid from universities where lastUpdated is null limit 100;
 
-SELECT * FROM test.universities where univid = 825 or univid=1072 or univid=1073 or univid=1222;
-SELECT * FROM test.professors where univid = 825 or univid=1072 or univid=1073 or univid=1222;
-SELECT * FROM test.ratings where univid = 825 or univid=1072 or univid=1073 or univid=1222;
+SELECT * FROM universities where univid = 825 or univid=1072 or univid=1073 or univid=1222;
+SELECT * FROM professors where univid = 825 or univid=1072 or univid=1073 or univid=1222;
+SELECT * FROM ratings where univid = 825 or univid=1072 or univid=1073 or univid=1222;
 
-SELECT * FROM test.professors;
-call test.InsertUpdateProfessors(81132,825,'Psychology','Psych321',3,5,5,4); 
-truncate test.professors;
-call test.insertUpdateProfessors(123,1234,'math','math 21a',3,4,5,2);
+SELECT * FROM professors;
+call InsertUpdateProfessors(81132,825,'Psychology','Psych321',3,5,5,4); 
+truncate professors;
+call insertUpdateProfessors(123,1234,'math','math 21a',3,4,5,2);
 
-select count(*) from test.professors where univid=825;
-select count(*) from test.professors where univid=1072;
-select count(*) from test.professors where univid=1073;
-select count(*) from test.professors where univid=1222;
+select count(*) from professors where univid=825;
+select count(*) from professors where univid=1072;
+select count(*) from professors where univid=1073;
+select count(*) from professors where univid=1222;
 
