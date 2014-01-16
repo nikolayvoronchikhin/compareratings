@@ -1,4 +1,5 @@
-This is my Undergraduate Research Project for ECS 199.
+Computer Science Undergraduate Research Project:
+=> Software Engineering research topics with Dr. Premkumar Devanbu, http://www.cs.ucdavis.edu/~devanbu/
 
 Project Title:
 FINDING DEPENDENCIES BETWEEN RATINGS AND MAJORS
