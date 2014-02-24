@@ -50,7 +50,7 @@ BEGIN
 
 DECLARE t int;
 
-select rowid into t from test.ratings where profId = v_profId;
+select rowid into t from ratings where profId = v_profId;
 select t;
 
 if (t is null) then

@@ -1,4 +1,5 @@
-This is my Undergraduate Research Project for ECS 199.
+Computer Science Undergraduate Research Project:
+=> Software Engineering research topics with Dr. Premkumar Devanbu, http://www.cs.ucdavis.edu/~devanbu/
 
 Project Title:
 FINDING DEPENDENCIES BETWEEN RATINGS AND MAJORS
@@ -44,3 +45,5 @@ It would be interesting to find college grads by major to see if there is a corr
 
 Educational Objectives:
 This project involves many aspects such as database design and connectivity, web application design and development, parsing XML/JSON, website scraping, and data filtering with MySQL Database queries. I will use my knowledge I have acquired in courses such as ECS 165A and ECS 165B, and work experience with web design and development, databases, and data analysis. This project will give me the opportunity to enhance my experience with relational databases, web scraping, databases, database connectivity, web application development, and data filtering. I hope that this research experience will broaden my understanding of these Computer Science principles that I have learned. I will use ideas I have learned as an undergrad to apply to new programming languages, Cloud & web application frameworks, Databases, and Web Servers.
+
+Technologies: MySQL Workbench, MySQL DB, MySQL Server, MySQL Notifier, SQL, Amazon Web Services, Eclipse IDE for Java EE Developers, Java, JSP, JDBC, JDK, JRE, HTML, CSS, JavaScript, jQuery, XML, CSV, Git, GitHub, GitHub for Windows, Windows PowerShell, Collabedit
