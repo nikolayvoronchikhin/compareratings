@@ -1,3 +1,6 @@
+-- Copyright (c) 2013.  Nikolay Voronchikhin.  
+-- All rights reserved.  Not for re-use or re-publication as academic work or otherwise.
+
 -- creating and dropping tables ---------------------------
 -----------------------------------------------------------
 TRUNCATE TABLE ratings;
